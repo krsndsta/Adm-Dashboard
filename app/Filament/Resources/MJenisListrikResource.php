@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MJenisAirResource\Pages;
-use App\Filament\Resources\MJenisAirResource\RelationManagers;
-use App\Models\MJenisAir;
+use App\Filament\Resources\MJenisListrikResource\Pages;
+use App\Filament\Resources\MJenisListrikResource\RelationManagers;
+use App\Models\MJenisListrik;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class MJenisAirResource extends Resource
+class MJenisListrikResource extends Resource
 {
-    protected static ?string $model = MJenisAir::class;
+    protected static ?string $model = MJenisListrik::class;
 
     protected static ?string $navigationIcon = '';
 
@@ -77,9 +77,9 @@ class MJenisAirResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMJenisAirs::route('/'),
-            'create' => Pages\CreateMJenisAir::route('/create'),
-            'edit' => Pages\EditMJenisAir::route('/{record}/edit'),
+            'index' => Pages\ListMJenisListriks::route('/'),
+            'create' => Pages\CreateMJenisListrik::route('/create'),
+            'edit' => Pages\EditMJenisListrik::route('/{record}/edit'),
         ];
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MJenisAirResource\Pages;
-use App\Filament\Resources\MJenisAirResource\RelationManagers;
-use App\Models\MJenisAir;
+use App\Filament\Resources\TrxPemakaianListrikResource\Pages;
+use App\Filament\Resources\TrxPemakaianListrikResource\RelationManagers;
+use App\Models\MJenisListrik;
+use App\Models\TrxPemakaianListrik;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,27 +14,25 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class MJenisAirResource extends Resource
+class TrxPemakaianListrikResource extends Resource
 {
-    protected static ?string $model = MJenisAir::class;
+    protected static ?string $model = TrxPemakaianListrik::class;
 
-    protected static ?string $navigationIcon = '';
-
-    public static function getNavigationGroup(): string
-    {
-        return 'Master Data';
-    }
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama')
+                Forms\Components\Select::make('jenis_listrik_id')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('deskripsi')
+                    ->label('Jenis Listrik')
+                    ->options(MJenisListrik::all()->pluck('nama', 'id')),
+                Forms\Components\TextInput::make('nilai')
                     ->required()
-                    ->maxLength(255),
+                    ->numeric(),
+                Forms\Components\DateTimePicker::make('dateTime')
+                    ->required(),
             ]);
     }
 
@@ -41,10 +40,15 @@ class MJenisAirResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('deskripsi')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('m_jenis_listrik.nama')->label('Jenis Listrik')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('nilai')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('dateTime')
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -77,9 +81,9 @@ class MJenisAirResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMJenisAirs::route('/'),
-            'create' => Pages\CreateMJenisAir::route('/create'),
-            'edit' => Pages\EditMJenisAir::route('/{record}/edit'),
+            'index' => Pages\ListTrxPemakaianListriks::route('/'),
+            'create' => Pages\CreateTrxPemakaianListrik::route('/create'),
+            'edit' => Pages\EditTrxPemakaianListrik::route('/{record}/edit'),
         ];
     }
 }

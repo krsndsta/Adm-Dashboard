@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MJenisAir extends Model
+class MJenisListrik extends Model
 {
     use HasFactory;
-    protected $table = 'm_jenis_air';
+    protected $table = 'm_jenis_listrik';
     protected $primaryKey = 'id';
     protected $fillable = [
         'nama',
         'deskripsi',
     ];
+    // public $timestamps = false;
 
-    // public function trx_pemakaian_air()
+    // public function trx_pemakaian_listrik()
     // {
-    //     return $this->hasMany(TrxPemakaianAir::class, 'jenis_air_id');
+    //     return $this->hasMany(TrxPemakaianListrik::class, 'jenis_listrik_id');
     // }
 }

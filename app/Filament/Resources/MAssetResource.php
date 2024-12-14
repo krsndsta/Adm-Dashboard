@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MJenisAirResource\Pages;
-use App\Filament\Resources\MJenisAirResource\RelationManagers;
-use App\Models\MJenisAir;
+use App\Filament\Resources\MAssetResource\Pages;
+use App\Filament\Resources\MAssetResource\RelationManagers;
+use App\Models\MAsset;
+use App\Models\MTipeAsset;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +14,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class MJenisAirResource extends Resource
+class MAssetResource extends Resource
 {
-    protected static ?string $model = MJenisAir::class;
+    protected static ?string $model = MAsset::class;
 
     protected static ?string $navigationIcon = '';
 
@@ -23,7 +24,7 @@ class MJenisAirResource extends Resource
     {
         return 'Master Data';
     }
-
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -31,9 +32,10 @@ class MJenisAirResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('deskripsi')
+                Forms\Components\Select::make('tipe_asset_id')
                     ->required()
-                    ->maxLength(255),
+                    ->label('Tipe Asset ID')
+                    ->options(MTipeAsset::all()->pluck('tipe_asset', 'id'))
             ]);
     }
 
@@ -43,8 +45,10 @@ class MJenisAirResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('deskripsi')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('m_tipe_asset.tipe_asset')
+                    ->label('Tipe Asset')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -77,9 +81,9 @@ class MJenisAirResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMJenisAirs::route('/'),
-            'create' => Pages\CreateMJenisAir::route('/create'),
-            'edit' => Pages\EditMJenisAir::route('/{record}/edit'),
+            'index' => Pages\ListMAssets::route('/'),
+            'create' => Pages\CreateMAsset::route('/create'),
+            'edit' => Pages\EditMAsset::route('/{record}/edit'),
         ];
     }
 }

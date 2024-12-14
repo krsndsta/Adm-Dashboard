@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MJenisAir extends Model
+class MTipeAsset extends Model
 {
     use HasFactory;
-    protected $table = 'm_jenis_air';
+    protected $table = 'm_tipe_asset';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama',
-        'deskripsi',
+        'tipe_asset','deskripsi',
     ];
 
-    // public function trx_pemakaian_air()
+    // public function m_asset()
     // {
-    //     return $this->hasMany(TrxPemakaianAir::class, 'jenis_air_id');
+    //     return $this->hasMany(MAsset::class, 'tipe_asset_id');
     // }
 }
