@@ -54,7 +54,7 @@ class TrxSampahResource extends Resource
                     ->required()
                     ->default(now()),
 
-                Forms\Components\Hidden::make('total_sampah'), // Jika diperlukan dalam backend
+                Forms\Components\Hidden::make('total_sampah'),
             ]);
     }
 

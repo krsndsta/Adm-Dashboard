@@ -20,8 +20,8 @@ class MAsset extends Model
     {
         return $this->belongsTo(MTipeAsset::class, 'tipe_asset_id');
     }
-    // public function trx_asset()
-    // {
-    //     return $this->belongsToMany(TrxAsset::class, 'trx_asset_detail', 'id_asset', 'id_pemantauan');
-    // }
+    public function trxAssetDetails()
+    {
+        return $this->hasMany(TrxAssetDetail::class, 'asset_id');
+    }
 }

@@ -32,7 +32,8 @@ class TrxPemakaianListrikResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\DateTimePicker::make('dateTime')
-                    ->required(),
+                    ->required()
+                    ->default(now()),
             ]);
     }
 
