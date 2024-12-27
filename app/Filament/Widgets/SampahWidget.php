@@ -19,11 +19,15 @@ class SampahWidget extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Sampah Organik',
-                    'data'  => $data->pluck('kenaikan_sampah_organik')->toArray()
+                    'data'  => $data->pluck('kenaikan_sampah_organik')->toArray(),
+                    'borderColor' => 'rgba(75, 192, 192, 1)',
+                    'backgroundColor' => 'rgba(75, 192, 192, 0.2)',
                 ],
                 [
                     'label' => 'Sampah Anorganik',
-                    'data'  => $data->pluck('kenaikan_sampah_anorganik')->toArray()
+                    'data'  => $data->pluck('kenaikan_sampah_anorganik')->toArray(),
+                    'borderColor' => 'rgba(255, 99, 132, 1)',
+                    'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
                 ],
             ],
             'labels' => $data->pluck('dateTime')->toArray()
