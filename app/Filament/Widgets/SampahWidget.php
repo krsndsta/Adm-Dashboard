@@ -12,8 +12,12 @@ class SampahWidget extends ChartWidget
     protected function getData(): array
     {
         $data = TrxSampah::select(['id', 'kenaikan_sampah_organik', 'kenaikan_sampah_anorganik', 'total_sampah', 'dateTime'])
-            ->orderByDesc('dateTime')
+            ->orderBy('dateTime')
             ->take(10);
+
+        $labels = $data->pluck('dateTime')->map(function ($date) {
+            return \Carbon\Carbon::parse($date)->format('d-m-y');
+        })->toArray();
 
         return [
             'datasets' => [
@@ -30,9 +34,11 @@ class SampahWidget extends ChartWidget
                     'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
                 ],
             ],
-            'labels' => $data->pluck('dateTime')->toArray()
+            'labels' => $labels,
         ];
     }
+
+
 
     protected function getType(): string
     {
